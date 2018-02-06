@@ -18,7 +18,7 @@ public class GraphEx {
 	void addEdge(int src,int dest)
 	{
 		arr[src].addFirst(dest);
-		System.out.println("Edge Added");
+		System.out.println("Edge1 Added");
 		
 	}
 	 void printGraph(int len)
