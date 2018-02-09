@@ -15,12 +15,12 @@ import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 public class ColumtoColumnLineage {
 	  public static void main(String args[]) throws IOException {
            
-			BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\XML_ColumntoColumn.csv"));
+			BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2_ColumntoColumn.csv"));
 		  
 
 	final Graph newGraph = TinkerGraph.open();
 	try {
-			newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\XML Add - creating multi level XML files.graphml");
+			newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.graphml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
