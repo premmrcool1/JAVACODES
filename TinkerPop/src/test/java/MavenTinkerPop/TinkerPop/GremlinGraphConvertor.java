@@ -28,16 +28,16 @@ public class GremlinGraphConvertor {
 	    	
 	    	final Graph newGraph = TinkerGraph.open();
 	    	try {
-				newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_FILE_TO_TBL.graphml");
+				newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.graphml");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_FILE_TO_TBL_Detail.csv"));
+	    	BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2_Detail.csv"));
 	    	writer1.write("Source Vertex ID,Target Vertex ID,Source Vertex Name,Source Vertex Type,Target Vertex Name,Target Vertex Type,Edge\n");
 	    	GraphTraversalSource n = newGraph.traversal();
 
-	        String csvFile = "C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_FILE_TO_TBL.txt";
+	        String csvFile = "C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.txt";
 	        String line = "";
 	        String cvsSplitBy = ",";
 

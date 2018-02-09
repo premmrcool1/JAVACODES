@@ -33,12 +33,12 @@ public class AppTest {
     	//Graph graph = GraphFactory.open(configuration);
         //GraphTraversalSource g = graph.traversal();
 
-			BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_FILE_TO_TBL.txt"));
+			BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.txt"));
 		  
   
     	final Graph newGraph = TinkerGraph.open();
     	try {
-			newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_FILE_TO_TBL.graphml");
+			newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.graphml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +64,7 @@ public class AppTest {
         System.out.println(nodes);
         while (iterator.hasNext()) {
         	String Str1=iterator.next().toString();
-        	System.out.println(Str1);
+        	//System.out.println(Str1);
         	Str1=Str1.replaceAll("\\[|v\\[|e\\[|\\]","");
         	System.out.println(Str1);
         	writer1.write(Str1);

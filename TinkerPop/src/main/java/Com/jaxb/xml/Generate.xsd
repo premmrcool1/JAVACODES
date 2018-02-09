@@ -1,0 +1,50 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="type" type="xs:string"/>
+  <xs:element name="ptype" type="xs:string"/>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="ref" type="xs:string"/>
+  <xs:element name="pref" type="xs:string"/>
+  <xs:element name="desc" type="xs:string"/>
+  <xs:element name="contents" type="xs:string"/>
+  <xs:element name="notes" type="xs:string"/>
+  <xs:element name="rtype" type="xs:short"/>
+  <xs:element name="reltype" type="xs:short"/>
+  <xs:element name="relref" type="xs:string"/>
+  <xs:element name="object">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="type"/>
+        <xs:element ref="ptype"/>
+        <xs:element ref="name"/>
+        <xs:element ref="ref"/>
+        <xs:element ref="pref"/>
+        <xs:element ref="desc" minOccurs="0"/>
+        <xs:element ref="contents" minOccurs="0"/>
+        <xs:element ref="notes" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="type"/>
+        <xs:element ref="rtype"/>
+        <xs:element ref="reltype"/>
+        <xs:element ref="ref"/>
+        <xs:element ref="relref"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="model">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="object" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="relation" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="implicit-types"/>
+      <xs:attribute type="xs:string" name="name"/>
+      <xs:attribute type="xs:string" name="schemaref"/>
+      <xs:attribute type="xs:string" name="xslt-version"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
