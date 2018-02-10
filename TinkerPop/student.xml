@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<object>
- 
-    <type>1404</type>
-    <ptype>9904</ptype>
-    <name>ETL_TBL1_to_TBL2</name>
-    <ref>schema-none://GRAPHML/orionds/1</ref>
-    <pref>schema-none://GRAPHML/orionds</pref>
-    <desc>N/A</desc>
-    <contents>N/A</contents>
-    <notes>N/A</notes>
-</object>
+<model>
+    <object>
+        <type>1404</type>
+        <ptype>9904</ptype>
+        <name>ETL_TBL1</name>
+        <ref>Schem-none</ref>
+        <pref>schema 1</pref>
+    </object>
+</model>
