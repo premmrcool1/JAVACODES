@@ -3,8 +3,8 @@
     <object>
         <type>1404</type>
         <ptype>9904</ptype>
-        <name>ETL_TBL1</name>
-        <ref>Schem-none</ref>
-        <pref>schema 1</pref>
+        <name>ETL_TBL1_to_TBL2</name>
+        <ref>Schem-nonegraphmldee5fead-bc84-4d9b-ba22-4f4904835f27</ref>
+        <pref>Schem-nonegraphml</pref>
     </object>
 </model>

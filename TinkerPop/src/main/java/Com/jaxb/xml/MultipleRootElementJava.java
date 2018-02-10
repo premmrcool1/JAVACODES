@@ -1,6 +1,7 @@
 package Com.jaxb.xml;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -9,9 +10,10 @@ import javax.xml.bind.Marshaller;
 
 public class MultipleRootElementJava {
 	
-
+	static ArrayList<Object> arraylist = new ArrayList<Object>();
 	public MultipleRootElementJava() throws JAXBException {
 		super();
+		 Model m=new Model();
 		// TODO Auto-generated constructor stub
 	}
 	public static void main(String[] args) throws JAXBException {
@@ -38,12 +40,13 @@ public class MultipleRootElementJava {
 		}*/
 		// TODO Auto-generated method stub
 		MultipleRootElementJava mul=new MultipleRootElementJava();
-        Model m=mul.ObjectCreation("ETL", "1404", "9904", "Schem-none", "schema 1");
-        Model m1=mul.ObjectCreation("ETL_TBL1", "1404", "9904", "Schem-none", "schema 1");
+        mul.ObjectCreation("ETL", "1404", "9904", "Schem-none", "schema 1");
+        mul.ObjectCreation("ETL_TBL1", "1404", "9904", "Schem-none", "schema 1");
+        mul.ObjectCreation("Customer_tbl1", "1411", "9904", "Schem-none", "schema 1");
+        Model m=mul.addtion(arraylist);
         mul.XMlCreation(m);
-        mul.XMlCreation(m1);
 	}
-	public Model ObjectCreation(String Name,String Type,String Ptype,String ref,String pref)
+	public Object ObjectCreation(String Name,String Type,String Ptype,String ref,String pref)
 	{
 		Object obj1=new Object();
 	      obj1.setName(Name);
@@ -51,12 +54,21 @@ public class MultipleRootElementJava {
 	      obj1.setPtype(Ptype);
 	      obj1.setRef(ref);
 	      obj1.setPref(pref);
+	      arraylist.add(obj1);
+	      return obj1;
 	      /*Relation Rel=new Relation();
 	      Rel.setType("1404");*/
-	      Model m=new Model();
-	      m.getObject().add(obj1);
-	      return m;
+	     
 		
+	}
+	public Model addtion(ArrayList<Object> arraylist2)
+	{
+		  Model m=new Model();
+		  for(Object Str: arraylist2)
+		  {
+		     m.getObject().add(Str);
+		  }
+	      return m;
 	}
 	public void XMlCreation(Model m) throws JAXBException
 	{
