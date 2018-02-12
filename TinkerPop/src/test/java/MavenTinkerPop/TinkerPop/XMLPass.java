@@ -39,6 +39,9 @@ public class XMLPass {
 	                String TargetName=vertices[4].trim();
 	                String TargetVertexType=vertices[5].trim();
 	                String Edge=vertices[6].trim();
+	                String SourceStepType=vertices[7].trim();
+	                String TargetStepType=vertices[9].trim();
+	                //System.out.println(SourceStepType);
 	               // System.out.println(SourceVerTexType);
 	                if(SourceVerTexType.equalsIgnoreCase( "Locator"))
 	                {
@@ -62,16 +65,61 @@ public class XMLPass {
 	                  arraylist.add(b);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
+	                 // System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(TargetName);
+	                }
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && SourceStepType.equalsIgnoreCase("Table output"))
+	                {
+	                  Object b=x.ObjectCreation(TargetName, "1413", "1412", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  arraylist.add(b);
+	                  //System.out.println(TargetVertexType);
+	                  //System.out.println(TargetVer);
+	                 // System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(TargetName);
+	                }
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && SourceStepType.equalsIgnoreCase("Table input"))
+	                {
+	                  Object b=x.ObjectCreation(TargetName, "1413", "1411", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  arraylist.add(b);
+	                  //System.out.println(TargetVertexType);
+	                  //System.out.println(TargetVer);
+	                 // System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(TargetName);
+	                }
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step") && TargetStepType.equalsIgnoreCase("Table output"))
+	                {
+	                  Object b=x.ObjectCreation(TargetName, "1412", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  arraylist.add(b);
+	                  //System.out.println(TargetVertexType);
+	                  //System.out.println(TargetVer);
 	                  System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
 	                  //System.out.println(TargetName);
 	                }
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step") && TargetStepType.equalsIgnoreCase("Table input"))
+	                {
+	                  Object b=x.ObjectCreation(TargetName, "1411", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  arraylist.add(b);
+	                  //System.out.println(TargetVertexType);
+	                  //System.out.println(TargetVer);
+	                  System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(TargetName);
+	                }
+	               /* if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && SourceStepType.equalsIgnoreCase("Table input"))
+	                {
+	                  Object b=x.ObjectCreation(SourceName, "1411", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  arraylist.add(b);
+	                  //System.out.println(TargetVertexType);
+	                  //System.out.println(TargetVer);
+	                  System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(TargetName);
+	                }*/
 	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Step"))
 	                {
 	                    R=x.RelationCreation("10", (short) 151, "151","schema-none://"+"PENTGRAPH1//orionods/"+SourceVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	                   //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
-	                  System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
 	                  //System.out.println(TargetName);
 	                }
 	                if(SourceVerTexType.equalsIgnoreCase("Transformation Stream field") && TargetVertexType.equalsIgnoreCase("Transformation Stream field"))
@@ -80,7 +128,7 @@ public class XMLPass {
 	                   arraylist1.add(R);
 	                   //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
-	                  System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
+	                  //System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
 	                  //System.out.println(TargetName);
 	                }
 

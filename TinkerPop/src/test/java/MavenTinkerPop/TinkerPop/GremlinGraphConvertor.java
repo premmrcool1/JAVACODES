@@ -34,7 +34,7 @@ public class GremlinGraphConvertor {
 				e.printStackTrace();
 			}
 	    	BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2_Detail.csv"));
-	    	writer1.write("Source Vertex ID,Target Vertex ID,Source Vertex Name,Source Vertex Type,Target Vertex Name,Target Vertex Type,Edge\n");
+	    	writer1.write("Source Vertex ID,Target Vertex ID,Source Vertex Name,Source Vertex Type,Target Vertex Name,Target Vertex Type,Edge,Source StepType,Source PluginId,Target StepType,Target PluginId\n");
 	    	GraphTraversalSource n = newGraph.traversal();
 
 	        String csvFile = "C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.txt";
@@ -51,11 +51,24 @@ public class GremlinGraphConvertor {
 	                String SourceVer=vertices[0].trim();
 	                String TargetVer=vertices[2].trim();
 	                String Edge=vertices[1].trim();
-	                String Output=SourceVer+","+TargetVer+","+n.V(SourceVer).has("name").values("name","type").toList().toString().replaceAll("\\[|\\]", "")+","+n.V(TargetVer).has("name").values("name","type").toList().toString().replaceAll("\\[|\\]", "")+","+Edge;
+	                String Output=SourceVer+","+TargetVer+","+n.V(SourceVer).has("name").values("name","type").toList().toString().replaceAll("\\[|\\]", "")+","+n.V(TargetVer).has("name").values("name","type").toList().toString().replaceAll("\\[|\\]", "")+","+Edge+",";
+	                String Sourceplug=n.V(SourceVer).has("stepType").has("pluginId").values("stepType","pluginId").toList().toString().replaceAll("\\[|\\]","").concat(",");
+	                String Targetplug=n.V(TargetVer).has("stepType").has("pluginId").values("stepType","pluginId").toList().toString().replaceAll("\\[|\\]","");
+	                if(Sourceplug.length() == 1)
+	                 {
+	                	Sourceplug="N/A,N/A,";
+	                 }
+	                if(Targetplug.length() == 0)
+	                 {
+	                	Targetplug="N/A,N/A,";
+	                 }
+	                System.out.println(Sourceplug);
+	                System.out.println(Targetplug);
+	                Output=Output.concat(Sourceplug).concat(Targetplug);
 	                //System.out.println(n.V(vertices).has("category").outE().inV().path().by("name").by("text").by("name").by("type").toList());
 	                //System.out.println("Source= " + vertices[0] + " , Target=" + vertices[2]);
 	                //System.out.println(SourceVer+","+TargetVer+","+n.V(SourceVer).has("name").values("name","type").toList().toString().replaceAll("\\[|\\]", "")+","+n.V(TargetVer).has("name").values("name","type").toList().toString().replaceAll("\\[|\\]", "")+","+Edge);
-	                System.out.println(Output);
+	                //System.out.println(Output);
 	                writer1.write(Output+"\n");
 	                //System.out.println(n.V(Str).has("name").values("name").toList());
 	                //+ "->" + n.V(vertices[2]).has("name").values("name").toList());
