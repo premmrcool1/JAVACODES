@@ -11,9 +11,14 @@ import javax.xml.bind.Marshaller;
 public class MultipleRootElementJava {
 	
 	static ArrayList<Object> arraylist = new ArrayList<Object>();
+	static ArrayList<Relation> arraylist1 = new ArrayList<Relation>();
+	ObjectFactory oF=new ObjectFactory();
+	Model m=oF.createModel();
 	public MultipleRootElementJava() throws JAXBException {
 		super();
-		 Model m=new Model();
+		 
+	   
+
 		// TODO Auto-generated constructor stub
 	}
 	public static void main(String[] args) throws JAXBException {
@@ -43,12 +48,15 @@ public class MultipleRootElementJava {
         mul.ObjectCreation("ETL", "1404", "9904", "Schem-none", "schema 1");
         mul.ObjectCreation("ETL_TBL1", "1404", "9904", "Schem-none", "schema 1");
         mul.ObjectCreation("Customer_tbl1", "1411", "9904", "Schem-none", "schema 1");
-        Model m=mul.addtion(arraylist);
-        mul.XMlCreation(m);
+        mul.RelationCreation("10",(short) 1404,"151","Schem-none","Schem-none");
+        mul.addtion(arraylist);
+        mul.Reladdtion(arraylist1);
+        mul.XMlCreation();
+        
 	}
 	public Object ObjectCreation(String Name,String Type,String Ptype,String ref,String pref)
 	{
-		Object obj1=new Object();
+		Object obj1=oF.createObject();
 	      obj1.setName(Name);
 	      obj1.setType(Type);
 	      obj1.setPtype(Ptype);
@@ -61,16 +69,39 @@ public class MultipleRootElementJava {
 	     
 		
 	}
+	public Relation RelationCreation(String Type,Short rtype,String reltype,String ref,String relref)
+	{
+		Relation Rel=oF.createRelation();
+	      Rel.setType(Type);
+	      Rel.setRtype(rtype);
+	      Rel.setReltype(rtype);
+	      Rel.setRef(ref);
+	      Rel.setRelref(relref);      
+	      arraylist1.add(Rel);
+	      return Rel;
+	      /*Relation Rel=new Relation();
+	      Rel.setType("1404");*/
+	     
+		
+	}
 	public Model addtion(ArrayList<Object> arraylist2)
 	{
-		  Model m=new Model();
+		  //Model m=new Model();
 		  for(Object Str: arraylist2)
 		  {
 		     m.getObject().add(Str);
 		  }
 	      return m;
 	}
-	public void XMlCreation(Model m) throws JAXBException
+	public Model Reladdtion(ArrayList<Relation> arraylist2)
+	{
+		  for(Relation Str: arraylist2)
+		  {
+		     m.getRelation().add(Str);
+		  }
+	      return m;
+	}
+	public void XMlCreation() throws JAXBException
 	{
 		 JAXBContext jcontent=JAXBContext.newInstance(Model.class);
 	      Marshaller Obj=jcontent.createMarshaller();
