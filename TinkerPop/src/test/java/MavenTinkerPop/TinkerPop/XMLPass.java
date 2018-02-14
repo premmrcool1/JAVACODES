@@ -18,16 +18,16 @@ public class XMLPass {
 	static ArrayList<Object> arraylist = new ArrayList<Object>();
 	static ArrayList<Relation> arraylist1 = new ArrayList<Relation>();
 	public static void main(String[] args) throws JAXBException {
-		   String csvFile = "C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2_detail.csv";
+		   String csvFile = "C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_FILE_TO_TBL_Detail.csv";
 	        String line = "";
 	        String cvsSplitBy = ",";
 	        MultipleRootElementJava x=new MultipleRootElementJava();
 	        ObjectFactory oF=new ObjectFactory();
 	        Object b1=oF.createObject();
 	        Relation R=oF.createRelation();
-	        b1=x.ObjectCreation("PENTGRAPH1","Namespace", "UnstructuredData", "schema-none://"+"PENTGRAPH1", "schema-none://"+"PENTGRAPH1");
+	        b1=x.ObjectCreation("FILEGRAPH","Namespace", "UnstructuredData", "schema-none://"+"FILEGRAPH", "schema-none://"+"FILEGRAPH");
 	        arraylist.add(b1);
-	        b1=x.ObjectCreation("HKEX","9904","Namespace", "schema-none://"+"PENTGRAPH1/orionods", "schema-none://"+"PENTGRAPH1");
+	        b1=x.ObjectCreation("HKEX","9904","Namespace", "schema-none://"+"FILEGRAPH/orionods", "schema-none://"+"FILEGRAPH");
 	        arraylist.add(b1);
 	        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
@@ -48,7 +48,7 @@ public class XMLPass {
 	                /************Job Object Creator *************************/
 	                if(SourceVerTexType.equalsIgnoreCase( "Locator"))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "1404", "9904", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1/orionods");
+	                  Object b=x.ObjectCreation(TargetName, "1404", "9904", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH/orionods");
 	                  arraylist.add(b);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
@@ -57,7 +57,7 @@ public class XMLPass {
 	                /************Stage Object Creator *************************/
 	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step"))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "151", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(TargetName, "151", "1404", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
@@ -66,31 +66,31 @@ public class XMLPass {
 	                /************Fields Object Creator *************************/
 	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && (Edge.indexOf("outputs") > 0))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "152", "151", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(TargetName, "152", "151", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
 	                 // System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
 	                  //System.out.println(TargetName);
 	                }
-	                /************DI Source Object fields Creator && DI Source fields  to Mapping fields Relation Creator *************************/
-	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && SourceStepType.equalsIgnoreCase("Table output"))
+	                /************DI Source Object fields Creator && DI Target fields  to Mapping fields Relation Creator *************************/
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && (SourceStepType.equalsIgnoreCase("Table output") || SourceStepType.equalsIgnoreCase("Text file output")))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "1413", "1412", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(TargetName, "1413", "1412", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
-	                  R=x.RelationCreation("10", (short) 152, (short) 1413,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
+	                  R=x.RelationCreation("10", (short) 152, (short) 1413,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer ,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
 	                 // System.out.println(SourceName+"-"+TargetName+"|"+SourceVer+"-"+TargetVer);
 	                  //System.out.println(TargetName);
 	                }
-	                /************DI Target Fields Object Creator && DI Target  fields to Mapping fields Relation Creator *************************/
-	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && SourceStepType.equalsIgnoreCase("Table input"))
+	                /************DI Target Fields Object Creator && DI Source  fields to Mapping fields Relation Creator *************************/
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Stream field") && (SourceStepType.equalsIgnoreCase("Table output") || SourceStepType.equalsIgnoreCase("CSV file input")))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "1413", "1411", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(TargetName, "1413", "1411", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
-	                  R=x.RelationCreation("10", (short) 1413, (short) 152,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
+	                  R=x.RelationCreation("10", (short) 1413, (short) 152,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer ,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	           
 	    
@@ -100,11 +100,11 @@ public class XMLPass {
 	                  //System.out.println(TargetName);
 	                }
 	                /*************DI Target creation && DI Target to Mapping*************/
-	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step") && TargetStepType.equalsIgnoreCase("Table output"))
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step") && (TargetStepType.equalsIgnoreCase("Table output") || TargetStepType.equalsIgnoreCase("Text file output")))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "1412", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(TargetName, "1412", "1404", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
-	                  R=x.RelationCreation("10", (short) 151, (short) 1412,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
+	                  R=x.RelationCreation("10", (short) 151, (short) 1412,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer ,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	                  System.out.println("iN TRAN");
 	                  //System.out.println(TargetVer);
@@ -112,11 +112,11 @@ public class XMLPass {
 	                  //System.out.println(TargetName);
 	                }
 	                /*************DI Source creation && DI Source to Mapping*************/
-	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step") && TargetStepType.equalsIgnoreCase("Table input"))
+	                if(SourceVerTexType.equalsIgnoreCase("Transformation") && TargetVertexType.equalsIgnoreCase("Transformation Step") && (TargetStepType.equalsIgnoreCase("Table input") ||TargetStepType.equalsIgnoreCase("CSV file input") ))
 	                {
-	                  Object b=x.ObjectCreation(TargetName, "1411", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(TargetName, "1411", "1404", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
-	                  R=x.RelationCreation("10", (short) 1411, (short) 151,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
+	                  R=x.RelationCreation("10", (short) 1411, (short) 151,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer ,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
@@ -125,7 +125,7 @@ public class XMLPass {
 	                }
 	               /* if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && SourceStepType.equalsIgnoreCase("Table input"))
 	                {
-	                  Object b=x.ObjectCreation(SourceName, "1411", "1404", "schema-none://"+"PENTGRAPH1//orionods/"+TargetVer, "schema-none://"+"PENTGRAPH1//orionods/"+SourceVer);
+	                  Object b=x.ObjectCreation(SourceName, "1411", "1404", "schema-none://"+"FILEGRAPH//orionods/"+TargetVer, "schema-none://"+"FILEGRAPH//orionods/"+SourceVer);
 	                  arraylist.add(b);
 	                  //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
@@ -135,7 +135,7 @@ public class XMLPass {
 	                /************Mapping to Mapping Relation creator *************************/
 	                if(SourceVerTexType.equalsIgnoreCase("Transformation Step") && TargetVertexType.equalsIgnoreCase("Transformation Step"))
 	                {
-	                    R=x.RelationCreation("10", (short) 151, (short) 151,"schema-none://"+"PENTGRAPH1//orionods/"+SourceVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
+	                    R=x.RelationCreation("10", (short) 151, (short) 151,"schema-none://"+"FILEGRAPH//orionods/"+SourceVer ,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	                   //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
@@ -145,7 +145,7 @@ public class XMLPass {
 	                /************Mapping Fields Relation Creator *************************/
 	                if(SourceVerTexType.equalsIgnoreCase("Transformation Stream field") && TargetVertexType.equalsIgnoreCase("Transformation Stream field"))
 	                {
-	                    R=x.RelationCreation("10", (short) 152, (short) 152,"schema-none://"+"PENTGRAPH1//orionods/"+SourceVer ,"schema-none://"+"PENTGRAPH1//orionods/"+TargetVer);
+	                    R=x.RelationCreation("10", (short) 152, (short) 152,"schema-none://"+"FILEGRAPH//orionods/"+SourceVer ,"schema-none://"+"FILEGRAPH//orionods/"+TargetVer);
 	                   arraylist1.add(R);
 	                   //System.out.println(TargetVertexType);
 	                  //System.out.println(TargetVer);
@@ -159,8 +159,8 @@ public class XMLPass {
 	        }
 	       /* Model m=oF.createModel();	        
 	        m.setImplicitTypes("yes");
-	        m.setName("PENTGRAPH1");
-	        m.setSchemaref("schema-none://PENTGRAPH1");
+	        m.setName("FILEGRAPH");
+	        m.setSchemaref("schema-none://FILEGRAPH");
 	        m.setXsltVersion("0.0.0");*/
 	        x.addtion(arraylist);
 	        x.Reladdtion(arraylist1);
