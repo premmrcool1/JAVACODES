@@ -33,12 +33,12 @@ public class AppTest {
     	//Graph graph = GraphFactory.open(configuration);
         //GraphTraversalSource g = graph.traversal();
 
-			BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.txt"));
+			BufferedWriter writer1 = new BufferedWriter(new FileWriter("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\1518543152531_ETL_FILE_TO_TBL.txt"));
 		  
   
     	final Graph newGraph = TinkerGraph.open();
     	try {
-			newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\ETL_TBL1_to_TBL2.graphml");
+			newGraph.io(IoCore.graphml()).readGraph("C:\\Users\\Premkumar.Nagarajan\\Desktop\\HKEX\\1518543152531_ETL_FILE_TO_TBL.graphml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

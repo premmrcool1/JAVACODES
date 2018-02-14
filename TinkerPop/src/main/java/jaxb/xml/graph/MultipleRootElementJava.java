@@ -1,4 +1,4 @@
-package Com.jaxb.xml;
+package jaxb.xml.graph;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class MultipleRootElementJava {
         mul.ObjectCreation("ETL", "1404", "9904", "Schem-none", "schema 1");
         mul.ObjectCreation("ETL_TBL1", "1404", "9904", "Schem-none", "schema 1");
         mul.ObjectCreation("Customer_tbl1", "1411", "9904", "Schem-none", "schema 1");
-        mul.RelationCreation("10",(short) 1404,"151","Schem-none","Schem-none");
+        mul.RelationCreation("10",(short) 1404,(short) 151,"Schem-none","Schem-none");
         mul.addtion(arraylist);
         mul.Reladdtion(arraylist1);
         mul.XMlCreation();
@@ -69,12 +69,12 @@ public class MultipleRootElementJava {
 	     
 		
 	}
-	public Relation RelationCreation(String Type,Short rtype,String reltype,String ref,String relref)
+	public Relation RelationCreation(String Type,Short rtype,Short reltype,String ref,String relref)
 	{
 		Relation Rel=oF.createRelation();
 	      Rel.setType(Type);
 	      Rel.setRtype(rtype);
-	      Rel.setReltype(rtype);
+	      Rel.setReltype(reltype);
 	      Rel.setRef(ref);
 	      Rel.setRelref(relref);      
 	      arraylist1.add(Rel);
@@ -103,9 +103,18 @@ public class MultipleRootElementJava {
 	}
 	public void XMlCreation() throws JAXBException
 	{
+		 m.setName("schema-none://PENTGRAPH");
+		 m.setXsltVersion("0.0.0");
+		 m.setSchemaref("schema-none://PENTGRAPH");
+		 m.setName("UnstructuredData");
+		 m.setImplicitTypes("yes");
 		 JAXBContext jcontent=JAXBContext.newInstance(Model.class);
 	      Marshaller Obj=jcontent.createMarshaller();
+	      
+	      Obj.setProperty("com.sun.xml.bind.xmlHeaders", "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>");
+	      Obj.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 	      Obj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	      Obj.setProperty("com.sun.xml.bind.namespacePrefixMapper", new MyNamespacePrefixMapper());
 		 ((Marshaller) Obj).marshal(m, System.out);
 
 	      try {
