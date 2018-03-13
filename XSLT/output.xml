@@ -1,0 +1,17 @@
+<portfolio>
+<stock exchange="NYSC">
+<name>ZACK CORP</name>
+<symbol>ZCXM</symbol>
+<price>28.875</price>
+</stock>
+<stock exchange="NASDAQ">
+<name>ZAZZYMAT INC</name>
+<symbol>ZFFX</symbol>
+<price>92.520</price>
+</stock>
+<stock exchange="NASDAQ">
+<name>ZYSMERGY INC</name>
+<symbol>ZYSZ</symbol>
+<price>20.313</price>
+</stock>
+</portfolio>
