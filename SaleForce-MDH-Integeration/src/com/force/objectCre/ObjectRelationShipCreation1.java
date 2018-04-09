@@ -35,11 +35,12 @@ public class ObjectRelationShipCreation1 {
     
 	 public static void main(String args[]) throws IOException, JAXBException, InterruptedException {
 		    
-		    String name = args[0];
-			String Schemaname = args[1];
-			String graphPath = args[2];
-			String servername=args[3];
-			String Authkey=args[4];
+		    String name = System.getProperty("ServerName", "unknown" );
+			String Schemaname = System.getProperty("Schemaname", "unknown" );
+			String graphPath = System.getProperty( "graphpath", "unknown" );
+			String mmxmlpath= System.getProperty( "mmxmlpath", "unknown" );
+			//String servername=args[3];
+			//String Authkey=args[4];
 			
 			String extension = "";
 			
@@ -50,7 +51,7 @@ public class ObjectRelationShipCreation1 {
 	        String cvsSplitBy = ",";
 	        String Schemaref="schema-"+name+"://";
 	        System.out.println(Schemaref);
-	    	objectList.add(x.ObjectCreation(args[0], "RA Server", "", Schemaref+ name + "/" +Schemaname,  ""));      
+	    	objectList.add(x.ObjectCreation(name, "RA Server", "", Schemaref+ name + "/" +Schemaname,  ""));      
 	    	if (i > 0) {
 			    extension = graphPath.substring(i+1);
 			    if(extension.equalsIgnoreCase("csv")) {
@@ -71,8 +72,8 @@ public class ObjectRelationShipCreation1 {
 
 	        x.addtion(objectList);
 	        x.Reladdtion(relationList);
-	        x.XMlCreation("common_new.xml","ReportingAnalysis","0.0.0","yes",Schemaref+ name);
-	        call_new.makeRequest("common_new.xml",servername,Authkey);
+	        x.XMlCreation(mmxmlpath,"ReportingAnalysis","0.0.0","yes",Schemaref+ name);
+	       // call_new.makeRequest("common_new.xml",servername,Authkey);
 
 	        
 
@@ -94,7 +95,8 @@ public static void Filecre(String graphPath,String Schemaname,String Schemaref,S
 	        String cvsSplitBy = ",";
       	System.out.println(objectName);
       	  objectList.add(x.ObjectCreation(objectName, "RA Dataset", "RA Server", Schemaref + name  + "/" +Schemaname+"/"+ objectName,  Schemaref + name + "/"+Schemaname));
-          while ((line = br.readLine()) != null) {
+         
+      	  while ((line = br.readLine()) != null) {
 
               // use comma as separator
 
@@ -104,8 +106,10 @@ public static void Filecre(String graphPath,String Schemaname,String Schemaref,S
               String TargetVer=vertices[2].trim();
             
               System.out.println(SourceVer1+","+SourceVer1+","+TargetVer);
-              objectList.add(x.ObjectCreation(SourceVer, "RA Field", "RA Dataset", Schemaref + name + "/" +  Schemaname+"/"+objectName+"/"+SourceVer,  Schemaref + name + "/"+ Schemaname+"/"+objectName));
-          }
+              
+             objectList.add(x.ObjectCreation(SourceVer, "RA Field", "RA Dataset", Schemaref + name + "/" +  Schemaname+"/"+objectName+"/"+SourceVer,  Schemaref + name + "/"+ Schemaname+"/"+objectName));
+             relationList.add(x.RelationCreation("10",(short) 1707, (short)1706, Schemaref + name + "/" +  Schemaname+"/"+objectName+"/"+SourceVer,Schemaref + name + "/"+ Schemaname+"/"+objectName))  ;        
+      	  }
          
       } catch (IOException e) {
           e.printStackTrace();
